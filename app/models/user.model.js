@@ -26,18 +26,6 @@ const userSchema = new mongoose.Schema({
     },
   },
 });
+userSchema.plugin(uniqueValidator);
 const User = mongoose.model(User, userSchema);
-
-await Character.insertMany([
-  { name: "Will Riker" },
-  { name: "Geordi LaForge" },
-]);
-//Character.save((err) => {
-if (err) {
-  console.error(err);
-} else {
-  console.log("Utilisateur enregistré avec succès.");
-}
-//Mettre dans le controller
-
 module.exports = User;
