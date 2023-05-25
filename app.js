@@ -1,11 +1,12 @@
+require("./app/config/db")
 const express = require('express')
 const app = express()
-const port = 3000
+module.exports=app
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const router = require("./app/routes/index.js");
+//Ajout des routes
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use("/api", router);
+app.use("/user", router);
+app.use("/account", router);
