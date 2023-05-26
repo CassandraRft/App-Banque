@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express();
 const userCtrl = require("../controllers/user.js");
+const auth = require("../../../../Downloads/auth.js");
 
 router.post("/signup", userCtrl.signup, function (req, res) {
   res.send("You are signup");

@@ -20,6 +20,21 @@ const bankAccountSchema = new mongoose.Schema({
   },
 });
 
-const BankAccount = mongoose.model("BankAccount", bankAccountSchema);
-
-module.exports = BankAccount;
+bankAccountSchema.pre("save", async function (next) {
+    try {
+      this.lastUpdated = Date.now();
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  bankAccountSchema.pre("findOneAndUpdate", function (next) {
+    this.set({ lastUpdated: Date.now() });
+    next();
+  });
+  
+  const BankAccount = mongoose.model("BankAccount", bankAccountSchema);
+  
+  module.exports = BankAccount;
+  
